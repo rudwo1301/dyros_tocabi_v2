@@ -1,10 +1,15 @@
 <launch>
-    <arg name="hand" default="true" />
+    <arg name="hand" default="false" />
     <arg name="gui" default="true" />
     <arg name="controller" default="true" />
     <arg name="log" default="false"/>
     <arg name="node_start_delay" default="0.2" />  
     <arg name="joystick" default="false" /> 
+    <arg name="small_foot" default="false" />
+    <arg name="rqt_depth_view" default="true" />
+    <arg name="rqt_depth_view_width" default="640" />
+    <arg name="rqt_depth_view_height" default="480" />
+    <arg name="rqt_depth_view_delay" default="2.0" />
 
     <node name="tocabi_controller_shm_reset" pkg="tocabi_controller" type="shm_reset" output="screen"/>
     
@@ -19,6 +24,10 @@
     </group>
     <group unless="$(arg hand)">
         <param name="mujoco_ros/model_file" type="string" value="$(find tocabi_description)/mujoco_model/dyros_tocabi.xml" />
+    </group>
+    <group if="$(arg small_foot)">
+        <param name="tocabi_controller/urdf_path" type="string" value="$(find tocabi_description)/robots/dyros_tocabi_ec2_small.urdf" />
+        <param name="mujoco_ros/model_file" type="string" value="$(find tocabi_description)/mujoco_model/dyros_tocabi_ec2_small.xml" />
     </group>
 
     <rosparam command="load" file="$(find tocabi_description)/setting/setting_simulation_positionPDgain.yaml" ns="/tocabi_controller" />
@@ -38,7 +47,13 @@
     <node name="mujoco_ros" pkg="mujoco_ros" type="mujoco_ros" output="screen" required="true" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
         <param name="license" type="string" value="$(env HOME)/mjkey.txt" />
         <param name="use_shm" value="true" />
+        <param name="depth_camera_enable" value="true" />
     </node>
+
+    <group if="$(arg rqt_depth_view)">
+          <node name="rqt_image_view_depth" pkg="rqt_image_view" type="rqt_image_view" output="screen"
+              launch-prefix="bash -c '$(find mujoco_ros)/scripts/resize_rqt_image_view.py $(arg rqt_depth_view_width) $(arg rqt_depth_view_height) $(arg rqt_depth_view_delay) &amp; sleep $(arg node_start_delay); $0 $@'" args="/mujoco_ros_interface/depth_image" />
+    </group>
 
     <group if="$(arg gui)">
         <node name="tocabi_gui" pkg="tocabi_gui" type="tocabi_gui" />

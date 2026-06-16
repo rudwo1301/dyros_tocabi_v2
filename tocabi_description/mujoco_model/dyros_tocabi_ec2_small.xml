@@ -35,7 +35,8 @@
         <mesh name="neck" file="neck.STL" />
         <mesh name="head" file="head.STL" scale="0.001 0.001 0.001"/>
         <mesh name="hand" file="wrist2joint.STL" scale="0.001 0.001 0.001"/>
-        <mesh name="Foot_Link" file="Foot_Link.STL"/>
+        <mesh name="Foot_Link_Right" file="Foot_Link_EC2_small_Right.stl"/>
+        <mesh name="Foot_Link_Left"  file="Foot_Link_EC2_small_Left.stl"/>
 
 
         <!--texture type="skybox" builtin="gradient" width="128" height="128" rgb1="1 1 1" rgb2="0 0 0"/-->
@@ -62,8 +63,6 @@
             <geom size="0.12 0.1525 0.025" pos="0.052 0 0.02" type="box" class="cls" />
             <geom size="0.05 0.13 0.05" pos="0.01 0 0.05" type="box" group="1"/>
             <site name="Pelvis_IMU" type="cylinder" size="0.005 0.005" group="4" rgba=".1 .1 .9 1"/>
-            <!-- <camera name="depth_camera" pos="0.191 0 0.197901" xyaxes="0.866 0 0.5 0 1 0" fovy="60"/> -->
-            <camera name="depth_camera" pos="0.191 0 0.197901" xyaxes="0.866 0 0.5 0 1 0" fovy="60"/>
             <body name="L_HipRoll_Link" pos="0.11 0.1025 -0.1025">
                 <inertial pos="-0.06477 0 0.05149" mass="2.679" fullinertia="0.01821 0.03121 0.2928 -1.676E-07 -0.0007745 -4.53E-09" />
                 <joint name="L_HipYaw_Joint" pos="0 0 0" axis="0 0 1" limited="true" range="-3.14 3.14" class="shg20_100_2so"/>
@@ -101,9 +100,9 @@
                                     <geom class="viz" rgba="0.85938 0.07813 0.23438 1" mesh="AnkleRoll_L_Link" />
                                     <geom class="cls" size="0.045 0.03125" pos="-0.08875 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
                                     <body name="L_Foot_Link" pos="0 0 0">
-                                        <inertial pos="0.0162 8e-05 -0.1209" mass="2.326" fullinertia="0.003386409 0.012600125 0.014296 1.1237E-05 -0.000526477 -1.976E-06" />
-                                        <geom class="viz" rgba="0.85938 0.07813 0.23438 1" mesh="Foot_Link" />
-                                        <geom class="cls" size="0.15 0.065 0.0135" pos="0.03 0 -0.145" type="box"/>
+                                        <inertial pos="0.006584 0.002092 -0.1268" mass="2.675" fullinertia="0.0039580 0.0093120 0.0108200 -4.3965E-05 0.0003307 1.079E-04" />
+                                        <geom class="viz" rgba="0.85938 0.07813 0.23438 1" mesh="Foot_Link_Left" />
+                                        <geom class="cls" size="0.125 0.065 0.012" pos="0.015 0.005 -0.141" type="box"/>
                                         <geom class="cls" size="0.045 0.03125" pos="-0.08875 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
                                         <site class="FTsensor" name="LF_FT" pos="0 0 -0.09"/>
                                     </body>
@@ -151,9 +150,9 @@
                                     <geom class="viz" rgba="0.85938 0.07813 0.23438 1" mesh="AnkleRoll_R_Link" />
                                     <geom class="cls" size="0.045 0.03125" pos="-0.08875 0 0" quat="0.707107 0 -0.707107 0" type="cylinder"/>
                                     <body name="R_Foot_Link" pos="0 0 0">
-                                        <inertial pos="0.0162 8e-05 -0.1209" mass="2.326" fullinertia="0.003386409 0.012600125 0.014296 1.1237E-05 -0.000526477 -1.976E-06" />
-                                        <geom class="viz" rgba="0.85938 0.07813 0.23438 1" mesh="Foot_Link" />
-                                        <geom class="cls" size="0.15 0.065 0.0135" pos="0.03 0 -0.145" type="box"/>
+                                        <inertial pos="0.006584 -0.002092 -0.1268" mass="2.675" fullinertia="0.0039580 0.0093120 0.0108200 4.3965E-05 0.0003307 -1.079E-04" />
+                                        <geom class="viz" rgba="0.85938 0.07813 0.23438 1" mesh="Foot_Link_Right" />
+                                        <geom class="cls" size="0.125 0.065 0.012" pos="0.015 -0.005 -0.141" type="box"/>
                                         <geom class="cls" size="0.045 0.03125" pos="-0.08875 0 0" quat="0.707107 0 -0.707107 0" type="cylinder" />
                                         <site class="FTsensor" name="RF_FT" pos="0 0 -0.09"/>
                                     </body>

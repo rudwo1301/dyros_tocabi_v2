@@ -781,7 +781,7 @@ void *TocabiController::Thread1() // Thread1, running with 2Khz.
                     {
                         static int thread3_count = 1;
 
-                        if (thread3_count == 40)
+                        if (thread3_count == floor(2000.0 / ac_.thread3_hz_))
                         {
                             thread3_count = 0;
 
